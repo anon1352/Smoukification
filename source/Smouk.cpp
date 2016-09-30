@@ -21,6 +21,7 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
 	}
 	return elems;
 }
+
 std::vector<std::string> split(const std::string &s, char delim) {
 	std::vector<std::string> elems;
 	split(s, delim, elems);
@@ -45,6 +46,7 @@ Iter select_randomly(Iter start, Iter end, RandomGenerator& g) {
 	std::advance(start, dis(g));
 	return start;
 }
+
 template<typename Iter>
 Iter select_randomly(Iter start, Iter end) {
 	static std::random_device rd;
@@ -55,7 +57,7 @@ Iter select_randomly(Iter start, Iter end) {
 int main(int argc, char const *argv[]) {
 	setlocale(LC_ALL, "");
 	if (argc < 2) {
-	  printf("ERROR: no files specified\nUsage: транссмоукификация.exe [TEXT] [WORDS]");
+	  printf("ERROR: no files specified\nUsage: transmokefication [TEXT] [WORDS]");
 	  return (-1);
 	}
 
@@ -66,21 +68,19 @@ int main(int argc, char const *argv[]) {
 	vector<string> slova_array;
 	stringstream buffer;
 
-	// ïèõí¸ì ôàéëû â ñòðîêó
+	// пихнём файлы в строку
 	buffer << fslova.rdbuf(); slova = buffer.str();
 	buffer.clear(); buffer.str("");
 	buffer << fpasta.rdbuf(); pasta = buffer.str();
 
-	// ðàçáèâàåì ïî ïðîáåëàì
+	// разбиваем по пробелам
 	pasta_array = split(pasta, ' ');
 	slova_array = split(slova, '\n');
 
-	// çàìåíÿåì ðàíäîìíûå ñëîâà íà òå, ÷òî â ñëîâàðå ñ âåðîÿòíîñòüþ â 30%
+	// заменяем рандомные слова на те, что в словаре с вероятностью в 30%
 	for (vector<string>::iterator it = pasta_array.begin(); it != pasta_array.end(); ++it) {
 		if (rand() % 100 > 70) *it = *select_randomly(slova_array.begin(), slova_array.end());
 	}
-
-	
 
 	pasta = join(pasta_array.begin(), pasta_array.end(), string(" "));
 	ofstream out("pasta_smouked.txt");
