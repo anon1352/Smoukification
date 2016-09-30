@@ -1,15 +1,27 @@
-# Smoukification
-Утилита, случайно заменяющая слова в данном тексте по данному словарю. На выходе можно получить интересный результат. А можно и не получить.
+# EN
+## Smokefication
+Randomly replaces words from a text with words from a dictionary. Provides true random based on Mersenne Twister. You can receive interesting result. Maybe.
 
-##Транссмооукификатор - Эмуляция Смоука v1.1
-```
-Программа берёт пасту и заменяет в ней случайные слова на случайные из словаря.
-Обеспечен труъ рандом на вихре Мерсенна.
-На выходе имеем pasta_smouked.txt
-Можно грабить корованы и набигать.
-```
-Для работы требуется 2 файла:
+### System requirements:
+- An operating system;
+- A compiler which can into C++11.
 
-- [x] [slova.txt] - словарь для замены слов
-- [x] [pasta.txt] - сама паста
-- [ ] /!\ Файлы должны называться именно так.
+### Usage
+Run `transmokefication [TEXT] [WORDS]` in console, where:
+- `[TEXT] — path to the text`
+- `[WORDS] — path to the dictionary`
+
+# RU
+## Smokefication
+Утилита, случайно заменяющая случайные слова в тексте по словарю. Обеспечен труъ рандом на вихре Мерсенна. На выходе можно получить интересный результат. А можно и не получить. Можно грабить корованы и набигать.
+
+### Системные требования:
+- Операционная система;
+- Компилятор, который может в C++11.
+
+### Использование:
+В консоли запустить `transmokefication [TEXT] [WORDS]`, где:
+- `[TEXT]` — путь к изменяемому тексту;
+- `[WORDS]` — путь к словарю.
+
+Вывод будет записан в файл `pasta_smouked.txt`.
