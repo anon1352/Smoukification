@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
@@ -55,24 +54,28 @@ Iter select_randomly(Iter start, Iter end) {
 
 int main(int argc, char const *argv[]) {
 	setlocale(LC_ALL, "");
+	if (argc < 2) {
+	  printf("ERROR: no files specified\nUsage: С‚СЂР°РЅСЃСЃРјРѕСѓРєРёС„РёРєР°С†РёСЏ.exe [TEXT] [WORDS]");
+	  return (-1);
+	}
 
-	ifstream fslova("slova.txt");
-	ifstream fpasta("pasta.txt");
+	ifstream fslova(argv[2]);
+	ifstream fpasta(argv[1]);
 	string slova = "", pasta = "";
 	vector<string> pasta_array;
 	vector<string> slova_array;
 	stringstream buffer;
 
-	// пихнём файлы в строку
+	// ГЇГЁГµГ­ВёГ¬ ГґГ Г©Г«Г» Гў Г±ГІГ°Г®ГЄГі
 	buffer << fslova.rdbuf(); slova = buffer.str();
 	buffer.clear(); buffer.str("");
 	buffer << fpasta.rdbuf(); pasta = buffer.str();
 
-	// разбиваем по пробелам
+	// Г°Г Г§ГЎГЁГўГ ГҐГ¬ ГЇГ® ГЇГ°Г®ГЎГҐГ«Г Г¬
 	pasta_array = split(pasta, ' ');
 	slova_array = split(slova, '\n');
 
-	// заменяем рандомные слова на те, что в словаре с вероятностью в 30%
+	// Г§Г Г¬ГҐГ­ГїГҐГ¬ Г°Г Г­Г¤Г®Г¬Г­Г»ГҐ Г±Г«Г®ГўГ  Г­Г  ГІГҐ, Г·ГІГ® Гў Г±Г«Г®ГўГ Г°ГҐ Г± ГўГҐГ°Г®ГїГІГ­Г®Г±ГІГјГѕ Гў 30%
 	for (vector<string>::iterator it = pasta_array.begin(); it != pasta_array.end(); ++it) {
 		if (rand() % 100 > 70) *it = *select_randomly(slova_array.begin(), slova_array.end());
 	}
